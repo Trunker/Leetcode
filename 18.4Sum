@@ -1,9 +1,13 @@
-Approach: Degenerate KSum to 2SUm
+Approach: Degenerate KSum to 2Sum
+
+Intuition: Degenerate 4Sum to 3Sum, then 3Sum to 2Sum, and finally solve 2Sum by 2 pointers.
+
+Algorithm:
 -When a+b+c+d=target, b+c+d=target-a. We make target1 = target-a, the problem now is degenerated into a 3Sum problem of which the input target is target1. 
 -When b+c+d=target1, c+d=target1-b. We make target2 = target1-b, the problem now is degenerated into the 2Sum problem of which the input target is target2. 
 -Finally we solve the 2Sum problem by two pointers and the 4Sum is solved. 
  
-Attentions: 
+Tips: 
 -Arrays.sort is used to put element with same value together so that later we can skip the element calculated before to get rid of duplicate element in the result.
 -We use two pointers r and k to solve the 2Sum problem.
 
