@@ -1,0 +1,50 @@
+Approach:Degenerate KSum to 2SUm
+When a+b+c+d=target, b+c+d=target-a, the problem now is degenerated into a 3Sum problem of which the target is target1 that is target-a. When b+c+d=target1, c+d=target1-b, the problem now is to solve the 2Sum problem of which the input is target2 that is target1-b. Finally we solve the 2Sum problem by two points and we'll get the answer. 
+Arrays.sort is used to put element with same value together so that later we can skip the element calculated before to get rid of duplicate element in the result.
+We use two pointers r and k to solve the 2Sum problem.
+
+JAVA Code:
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+       List<List<Integer>> intListList = new ArrayList();
+       Arrays.sort(nums);
+      for(int i=0;i<nums.length-3;i++){
+        if(i>0&&nums[i]==nums[i-1]){
+            continue;
+        }
+        int target1 = target-nums[i];
+          for(int j=i+1;j<nums.length-2;j++){
+              if(j>i+1&&nums[j]==nums[j-1]){
+                  continue;
+              }
+        int target2=target1-nums[j];
+        int r=j+1;
+        int k=nums.length-1;
+        while(r<k){
+            if(nums[r]+nums[k]==target2){
+                intListList.add(Arrays.asList(nums[i],nums[j],nums[r],nums[k]));
+                r++;
+                k--;
+                while(r<k&&nums[r-1]==nums[r]){
+                    r++;
+                } 
+                while(k>r&&nums[k+1]==nums[k]){
+                    k--;
+                }
+            }
+            else if(nums[r]+nums[k]>target2){
+                k--;
+            }
+            else{
+                r++;
+             }
+            }   
+         }
+      }
+        return intListList;
+    }
+}
+Complexity Analysis
+Time complexity:O(n³), n is equal to nums.length
+Space complexity:O(1)
+
